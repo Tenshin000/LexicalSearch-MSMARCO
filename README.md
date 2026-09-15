@@ -1,5 +1,11 @@
 # LexicalSearch-MSMARCO
+[Link Colab](https://colab.research.google.com/drive/1iQKPOMncfOYtgZvOI3TXXxtt7eDHO7XX?usp=drive_link)
+
 ## English Summary
+This project was developed by the "**Mario Tchou**" group:
+- [**Francesco Panattoni**](https://github.com/Tenshin000)
+- [**Leonardo Ceccarelli**](https://github.com/cecco01)
+
 A Fast Traditional Information Retrieval Pipeline. Project for the exam of Multimedia Information Retrieval and Computer Vision at the University of Pisa for the Master's Degree in Artificial Intelligence and Data Engineering. 
 
 The project is a high-performance lexical search engine, developed entirely in Python for Information Retrieval over the MS MARCO Passage collection (consisting of approximately 8.8 million documents), architected to operate under the strict RAM constraints of Google Colab. The data lifecycle begins with a heavily optimized, low-level text preprocessing stage: textual documents are normalized using the NFKD decomposition provided by the `unicodedata` library, combined with a C-level ASCII filter, allowing accents and special characters to be removed without resorting to slow replacement loops. Subsequently, valid token extraction (including abbreviations and textual numbers converted on the fly into digits through a static O(1) mapping) is performed in a single pass using precompiled regular expressions. Stopword filtering relies on a `frozenset` to guarantee constant-time lookup while avoiding reallocation overhead, whereas final stemming is delegated to the Cython backend of the `PyStemmer` library, which processes the entire document token list in a single C-level batch.
@@ -21,6 +27,10 @@ In terms of efficiency, TAAT and DAAT performance is compared using a Bootstrap 
 This ultimately completes the design of a pure Information Retrieval system, free of Deep Learning, scalable, and pushed to the theoretical and practical limits of lexical and engineering optimizations.
 
 ## Riassunto in Italiano
+Questo progetto è stato sviluppato dal gruppo "**Mario Tchou**":
+- [**Francesco Panattoni**](https://github.com/Tenshin000)
+- [**Leonardo Ceccarelli**](https://github.com/cecco01)
+
 Una pipeline rapida e tradizionale di Information Retrieval. Progetto per l'esame di Multimedia Information Retrieval and Computer Vision presso l'Università di Pisa, per il corso di laurea magistrale in Artificial Intelligence and Data Engineering. 
 
 Il progetto è un motore di ricerca lessicale ad alte prestazioni, sviluppato interamente in Python per l'Information Retrieval sulla collezione MS MARCO Passage (composta da circa 8,8 milioni di documenti), architettato per operare sotto i rigidi vincoli di memoria RAM di Google Colab. Il ciclo di vita del dato inizia con una fase di preprocessing del testo pesantemente ottimizzata a basso livello: i documenti testuali vengono normalizzati tramite la scomposizione NFKD della libreria `unicodedata` accoppiata a un filtro ASCII in C, permettendo di rimuovere accenti e caratteri speciali senza ricorrere a lenti cicli di sostituzione. Successivamente, l'estrazione dei token validi (incluse sigle e numeri testuali convertiti al volo in cifre tramite una mappa statica O(1)) avviene in un unico passaggio tramite espressioni regolari precompilate. Il filtraggio delle stopword utilizza un `frozenset` per garantire un tempo di lookup garantito e privo di overhead di riallocazione, mentre lo stemming finale è delegato al backend Cython della libreria `PyStemmer`, che elabora l'intera lista di token del documento in un unico batch C-level.
